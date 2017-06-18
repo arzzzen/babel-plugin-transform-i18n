@@ -1,4 +1,5 @@
-module.exports = function({ types: t }) {
+module.exports = function(babel) {
+    const t = babel.types;
     function getNodeForValue(value, tokens) {
         if (value.match(/^\{.*?\}$/) && tokens[value]) {
             return tokens[value];
@@ -14,7 +15,7 @@ module.exports = function({ types: t }) {
                 const dictionary = state.opts.dictionary || {};
 
                 if (t.isIdentifier(path.node.callee) && path.node.callee.name === translationFunctionName) {
-                    let string = path.node.arguments[0].extra.rawValue;
+                    var string = path.node.arguments[0].extra.rawValue;
 
                     if (dictionary[string]) {
                         string = dictionary[string];
